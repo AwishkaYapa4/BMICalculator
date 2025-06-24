@@ -1,3 +1,4 @@
+import 'package:bmi_cal/components.dart';
 import 'package:flutter/material.dart';
 
 class BmiCal extends StatefulWidget {
@@ -8,6 +9,10 @@ class BmiCal extends StatefulWidget {
 }
 
 class _BmiCalState extends State<BmiCal> {
+  bool isMale = false;
+  int height = 170;
+  int weight = 70;
+  int age = 25;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,44 +34,60 @@ class _BmiCalState extends State<BmiCal> {
             Row(
               children: [
                 Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 35, 48, 54),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isMale = true;
+                      });
+                    },
 
-                    child: Column(
-                      children: [
-                        Icon(
-                          Icons.male,
-                          size: 50,
-                          color: Color.fromARGB(255, 255, 255, 255),
-                        ),
-                        Text(
-                          "Male",
-                          style: TextStyle(fontSize: 24, color: Colors.white),
-                        ),
-                      ],
+                    child: Container(
+                      padding: EdgeInsets.all(20),
+                      decoration:
+                          isMale
+                              ? kSelectedTileBorderDecoration
+                              : kTileBorderDecoration,
+
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.male,
+                            size: 50,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                          ),
+                          Text(
+                            "Male",
+                            style: TextStyle(fontSize: 24, color: Colors.white),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(width: 20),
                 Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 35, 48, 54),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Column(
-                      children: [
-                        Icon(Icons.female, size: 50, color: Colors.white),
-                        Text(
-                          "Female",
-                          style: TextStyle(fontSize: 24, color: Colors.white),
-                        ),
-                      ],
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isMale = false;
+                      });
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(20),
+                      decoration:
+                          !isMale
+                              ? kSelectedTileBorderDecoration
+                              : kTileBorderDecoration,
+
+                      child: Column(
+                        children: [
+                          Icon(Icons.female, size: 50, color: Colors.white),
+                          Text(
+                            "Female",
+                            style: TextStyle(fontSize: 24, color: Colors.white),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
